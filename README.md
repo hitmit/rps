@@ -1,2 +1,2 @@
-# rps
-Rps School Mohindergarh
+# RPS
+RPS School Mohindergarh
