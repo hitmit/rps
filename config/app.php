@@ -151,6 +151,9 @@ return [
         // HTML and FORM class.
         Collective\Html\HtmlServiceProvider::class,
 
+        // App auth package.
+        Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
+
     ],
 
     /*
@@ -202,6 +205,11 @@ return [
         // Form and HTML alias.
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+
+        // App auth package.
+        'Activation' => Cartalyst\Sentinel\Laravel\Facades\Activation::class,
+        'Reminder'   => Cartalyst\Sentinel\Laravel\Facades\Reminder::class,
+        'Sentinel'   => Cartalyst\Sentinel\Laravel\Facades\Sentinel::class,
 
     ],
 
