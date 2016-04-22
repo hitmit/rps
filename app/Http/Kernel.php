@@ -4,8 +4,8 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
-class Kernel extends HttpKernel
-{
+class Kernel extends HttpKernel {
+
     /**
      * The application's global HTTP middleware stack.
      *
@@ -29,5 +29,11 @@ class Kernel extends HttpKernel
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => \School\Auth\Http\Middleware\AdminMiddleware::class,
+        'parent' => \School\Auth\Http\Middleware\ParentMiddleware::class,
+        'student' => \School\Auth\Http\Middleware\StudentMiddleware::class,
+        'teacher' => \School\Auth\Http\Middleware\TeacherMiddleware::class,
+        'loggedIn' => \School\Auth\Http\Middleware\AuthMiddleware::class,
     ];
+
 }

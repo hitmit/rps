@@ -154,6 +154,12 @@ return [
         // App auth package.
         Cartalyst\Sentinel\Laravel\SentinelServiceProvider::class,
 
+        // School academic Class
+        School\Academic\AcademicServiceProvider::class,
+
+        // School  auth class
+        School\Auth\SchoolAuthServiceProvider::class,
+
     ],
 
     /*

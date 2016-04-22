@@ -1,0 +1,20 @@
+{
+    "name": "school/academic",
+    "description": "provide routes and functionality related to school academic",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hitesh Mittal",
+            "email": "hiteshmittal1990@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr~4": {
+            "school\\academic\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "illuminate/support": "-5"
+    }
+}
