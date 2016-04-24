@@ -140,16 +140,22 @@ class TeachersController extends Controller {
     public function destroy($id) {
         // Find user based on ID.
         $user = Sentinel::findById($id);
-        // Find user role from slug.
-        $role = Sentinel::findRoleBySlug('teacher');       
-        // Remove user roles.
-        $role->users()->detach($user);
-        // Delete User.
-        $user->delete();
-        // Find User attributes. 
-        $user_attributes = UserAttributes::find($id);
-        // Delete User attributes.
-        $user_attributes->delete();
-        return Redirect::route('teachers.index')->withMessage('Teacher Deleted Successfully.');
+        if($user) {
+            // Find user role from slug.
+            $role = Sentinel::findRoleBySlug('teacher');
+            // Remove user roles.
+            $role->users()->detach($user);
+            // Delete User.
+            $user->delete();
+            // Find User attributes.
+            $user_attributes = UserAttributes::find($id);
+            if ($user_attributes) {
+                // Delete User attributes.
+                $user_attributes->delete();
+            }
+            return Redirect::route('teachers.index')->withMessage('Teacher Deleted Successfully.');
+        } else {
+            return Redirect::route('teachers.index')->withMessage('Teacher Not Found.');
+        }
     }
 }
