@@ -6,13 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\View;
-use School\Academic\Models\Academic;
-use School\Academic\Http\Requests\CreateAcademicYearRequest;
-use Session;
-use Redirect;
 use DB;
 use Sentinel;
 use School\Auth\Models\StudentAcademicYears;
+use School\Auth\Models\UserAttributesModel as UserAttributes;
 
 class RegisterController extends Controller {
 
@@ -60,34 +57,39 @@ class RegisterController extends Controller {
             'password' => $request->get('password'),
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
-            'studentRollId' => $request->get('studentRollId'),
-            'gender' => $request->get('gender'),
-            'address' => $request->get('address'),
-            'phoneNo' => $request->get('phoneNo'),
-            'mobileNo' => $request->get('mobileNo'),
-            'parentProfession' => $request->get('parentProfession'),
         );
 
+        $user_attributes = new UserAttributes;
+        $user_attributes->studentRollId = $request->get('studentRollId');
+        $user_attributes->gender = $request->get('gender');
+        $user_attributes->address = $request->get('address');
+        $user_attributes->phoneNo = $request->get('phoneNo');
+        $user_attributes->mobileNo = $request->get('mobileNo');
+        $user_attributes->parentProfession = $request->get('parentProfession');
+
         if ($request->get('birthday') != "") {
-            $birthday = explode("/", $request->get('birthday'));
-            $birthday = mktime(0, 0, 0, $birthday['0'], $birthday['1'], $birthday['2']);
-            $user['birthday'] = $birthday;
+            $birthday = strtotime(date('Y-m-d', $request->get('birthday')));
+            $user_attributes->birthday = $birthday;
         }
 
         if ($request->get('studentClass') != "") {
-            $user['studentAcademicYear'] = 2;
-            $user['studentClass'] = $request->get('studentClass');
+            $user_attributes->studentAcademicYear = 2;
+            $user_attributes->studentClass = $request->get('studentClass');
         }
 
         if ($request->get('studentInfo') != "") {
-            $user['parentOf'] = json_encode($request->get('studentInfo'));
+            $user_attributes->parentOf = json_encode($request->get('studentInfo'));
         }
 
+        // Register user.
         $sentinelUser = Sentinel::register($user);
 
+        // Find user role and assign user that role.
         $role = Sentinel::findRoleByName($request->get('role'));
-
         $role->users()->attach($sentinelUser);
+
+        $user_attributes->id = $sentinelUser->id;
+        $user_attributes->save();
 
         if ($request->get('role') == "student") {
             $studentAcademicYears = new StudentAcademicYears();
@@ -120,4 +122,5 @@ class RegisterController extends Controller {
         }
         return json_encode($retArray);
     }
+
 }
