@@ -5,7 +5,7 @@
 @section('main-content')
 	{!! Form::open(array('class' => 'form-inline',  'method' => 'DELETE', 'route' => array('transports.destroy', $transport->id))) !!}
 		Do you really want to delete {{ $transport->transportTitle }} ?
-        <a href="{{ route('admin.academic.index') }}"class="btn btn-default">Cancel</a>
+        <a href="{{ route('transports.index') }}"class="btn btn-default">Cancel</a>
         {!! Form::submit('Delete', array('class' => 'btn btn-danger')) !!}
     {!! Form::close() !!}
 @endsection
