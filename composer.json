@@ -25,7 +25,8 @@
             "App\\": "app/",
             "School\\Academic\\": "packages/school/academic/src/",
             "School\\Auth\\": "packages/school/auth/src/",
-            "School\\Teachers\\": "packages/school/teachers/src/"
+            "School\\Teachers\\": "packages/school/teachers/src/",
+            "School\\Parents\\": "packages/school/parents/src/"
         }
     },
     "autoload-dev": {
