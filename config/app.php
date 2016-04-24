@@ -162,6 +162,9 @@ return [
         
         // School Teacher class
         School\Teachers\TeachersServiceProvider::class,
+
+        // School Student class
+        School\Students\StudentsServiceProvider::class,
     ],
 
     /*
