@@ -165,6 +165,9 @@ return [
 
         // School Transports class
         School\Transports\TransportsServiceProvider::class,
+
+        // School Dormitory class
+        School\Dormitory\DormitoryServiceProvider::class,
     ],
 
     /*

@@ -26,7 +26,8 @@
             "School\\Academic\\": "packages/school/academic/src/",
             "School\\Auth\\": "packages/school/auth/src/",
             "School\\Teachers\\": "packages/school/teachers/src/",
-            "School\\Transports\\": "packages/school/transports/src/"
+            "School\\Transports\\": "packages/school/transports/src/",
+            "School\\Dormitory\\": "packages/school/dormitory/src/"
         }
     },
     "autoload-dev": {
