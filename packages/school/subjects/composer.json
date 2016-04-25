@@ -1,0 +1,18 @@
+{
+    "name": "school/subjects",
+    "description": "Subject Package for school",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hitesh Mittal",
+            "email": "hiteshmittal1990@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr~4": {
+            "school\\subjects\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

@@ -168,6 +168,9 @@ return [
 
         // School Dormitory class
         School\Dormitory\DormitoryServiceProvider::class,
+
+        // School Subjects class
+        School\Subjects\SubjectsServiceProvider::class,
     ],
 
     /*
