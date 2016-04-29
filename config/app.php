@@ -173,7 +173,7 @@ return [
         School\Subjects\SubjectsServiceProvider::class,
 
         // School Accounts class
-        School\Subjects\AccountsServiceProvider::class,
+        School\Accounts\AccountsServiceProvider::class,
     ],
 
     /*
