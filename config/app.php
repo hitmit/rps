@@ -171,6 +171,9 @@ return [
 
         // School Subjects class
         School\Subjects\SubjectsServiceProvider::class,
+
+        // School Accounts class
+        School\Subjects\AccountsServiceProvider::class,
     ],
 
     /*
