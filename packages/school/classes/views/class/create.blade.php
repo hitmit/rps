@@ -21,30 +21,50 @@
                 	{!! csrf_field() !!}
                   	<div class="box-body">
                     	<div class="form-group">
-                      		<label for="name" class="col-sm-2 control-label">Fee Title </label>
+                      		<label for="name" class="col-sm-2 control-label">Class Name</label>
                       		<div class="col-sm-10">
-                        		<input type="text" class="form-control" required="required" placeholder="Fee Title" name="feeTitle" />
+                        		<input type="text" class="form-control" required="required" placeholder="Class Name" name="className" />
                       		</div>
                     	</div>
 
                     	<div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">Default amount </label>
+                            <label for="name" class="col-sm-2 control-label">Class Teacher</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" required="required" placeholder="Default amount" name="feeDefault" />
+                                <select class="form-control" required="required" name="classTeacher[]" multiple="multiple">
+                                    @foreach($teachers as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->first_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label">Notes </label>
+                            <label for="name" class="col-sm-2 control-label">Class Subjects</label>
                             <div class="col-sm-10">
-                                <textarea class="form-control" placeholder="Notes" name="feeNotes" ></textarea>
+                                <select class="form-control" required="required" name="classSubjects[]" multiple="multiple">
+                                    @foreach($subjects as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->subjectTitle }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">Dormitory</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" name="dormitoryId">
+                                    <option value="">Select Dormitory</option>
+                                    @foreach($dormitories as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->dormitory }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                    	</div><!-- /.box-body -->
                   	<div class="box-footer">
 	                    <a href="{{ route('feetype.index') }}" class="btn btn-default pull-left">Cancel</a>
-	                    <button type="submit" class="btn btn-info pull-right">Add fee type</button>
+	                    <button type="submit" class="btn btn-info pull-right">Add Class</button>
                   	</div><!-- /.box-footer -->
                 </form>
             </div><!-- /.box -->

@@ -29,7 +29,8 @@
             "School\\Transports\\": "packages/school/transports/src/",
             "School\\Dormitory\\": "packages/school/dormitory/src/",
             "School\\Subjects\\": "packages/school/subjects/src/",
-            "School\\Accounts\\": "packages/school/accounts/src/"
+            "School\\Accounts\\": "packages/school/accounts/src/",
+            "School\\Classes\\": "packages/school/classes/src/"
         }
     },
     "autoload-dev": {

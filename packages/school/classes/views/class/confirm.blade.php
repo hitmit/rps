@@ -1,6 +1,6 @@
 @extends('app')
 @section('contentheader_title')
-    Delete Class
+  <i class="fa fa-sitemap"></i>  Delete {{ $class->className }}
 @endsection
 @section('main-content')
 	{!! Form::open(array('class' => 'form-inline',  'method' => 'DELETE', 'route' => array('classes.destroy', $class->id))) !!}

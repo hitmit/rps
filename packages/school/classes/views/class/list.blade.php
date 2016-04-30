@@ -1,6 +1,6 @@
 @extends('app')
 @section('contentheader_title')
-    <i class="fa fa-money"></i> Fee Types
+    <i class="fa fa-sitemap"></i> Classes
 @endsection
 
 @section('main-content')
@@ -12,27 +12,29 @@
             @endif
             <div class="box">
                 <div class="box-header">
-                    <h3 class="box-title">List fee types</h3>
+                    <h3 class="box-title">List Classes</h3>
                     <div class="box-tools">
-                        <a href="{{ route('feetype.create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Fee Type</a>
+                        <a href="{{ route('classes.create') }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Class</a>
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-hover">
                         <tr>
-                            <th>Fee Type</th>
-                            <th>Default amount</th>
+                            <th>Class Name</th>
+                            <th>Class Teacher</th>
+                            <th>Associated Subjects</th>
+                            <th>Class Dormitory</th>
                             <th>Operations</th>
                         </tr>
-                         @foreach ($feetypes as $key => $value)
+                         @foreach ($classes as $key => $value)
                             <tr>
-                                <td>{{ $value->feeTitle  }}</td>
+                                <td>{{ $value->className  }}</td>
+                                <td>{{ $value->classTeacher  }}</td>
+                                <td>{{ $value->classSubjects  }}</td>
+                                <td>{{ $value->dormitoryName  }}</td>
                                 <td>
-                                    {{ $value->feeDefault }}
-                                </td>
-                                <td>
-                                    <a class="btn btn-flat btn-primary" href="{{ route('feetype.edit', $value->id) }}" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
-                                    <a class="btn btn-flat btn-danger" href="{{ route('feetype.confirm', $value->id) }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-flat btn-primary" href="{{ route('classes.edit', $value->id) }}" title="Edit"><i class="fa fa-pencil-square-o"></i></a>
+                                    <a class="btn btn-flat btn-danger" href="{{ route('classes.confirm', $value->id) }}" title="Delete"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @endforeach

@@ -8,7 +8,11 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use School\Classes\Models\ClassModel;
 use School\Classes\Http\Requests\CreateClassRequest;
+use School\Subjects\Models\SubjectsModel as Subjects;
+use School\Dormitory\Models\DormitoryModel as Dormitory;
 use Redirect;
+use Sentinel;
+use DB;
 
 class ClassesController extends Controller
 {
@@ -25,7 +29,38 @@ class ClassesController extends Controller
      */
     public function index()
     {
-        $classes = $this->class->all();
+        $role = Sentinel::findRoleBySlug('teacher');
+        $teachers = $role->users()->with('roles')->lists('first_name', 'id')->toArray();
+
+        $subject = new Subjects();
+        $subjects = $subject->lists('subjectTitle', 'id')->toArray();
+
+        $classes = DB::table('classes')
+            ->leftJoin('dormitories', 'dormitories.id', '=', 'classes.dormitoryId')
+            ->select('classes.id as id',
+                'classes.className as className',
+                'classes.classTeacher as classTeacher',
+                'classes.classSubjects as classSubjects',
+                'dormitories.id as dormitory',
+                'dormitories.dormitory as dormitoryName')
+            ->where('classAcademicYear', 1)
+            ->get();
+        foreach ($classes as $key => $value) {
+            $teacher = json_decode($value->classTeacher);
+            $teacherArray = [];
+            foreach ($teacher as $val) {
+                $teacherArray[] = $teachers[$val];
+            }
+
+            $subject = json_decode($value->classSubjects);
+            $subjectArray = [];
+            foreach ($subject as $val) {
+                $subjectArray[] = $subjects[$val];
+            }
+
+            $classes[$key]->classTeacher = implode(", ", $teacherArray);
+            $classes[$key]->classSubjects = implode(", ", $subjectArray);
+        }
         return view('class::class.list', ['classes' => $classes]);
     }
 
@@ -36,7 +71,13 @@ class ClassesController extends Controller
      */
     public function create()
     {
-        return view('account::feetype.create');
+        $role = Sentinel::findRoleBySlug('teacher');
+        $teachers = $role->users()->with('roles')->lists('first_name', 'id')->toArray();
+        $subject = new Subjects();
+        $subjects = $subject->lists('subjectTitle', 'id')->toArray();
+        $dormitory = new Dormitory();
+        $dormitories = $dormitory->lists('dormitory', 'id')->toArray();
+        return view('class::class.create', ['teachers' => $teachers, 'subjects' => $subjects, 'dormitories' => $dormitories]);
     }
 
     /**
@@ -47,8 +88,15 @@ class ClassesController extends Controller
      */
     public function store(CreateClassRequest $request)
     {
-        $this->feeType->create($request->all());
-        return Redirect::route('feetype.index')->withMessage('Fee type Created Successfully.');
+        $data = [
+            'className' => $request->get('className'),
+            'classTeacher' => json_encode($request->get('classTeacher')),
+            'classAcademicYear' => 1,
+            'classSubjects' => json_encode($request->get('classSubjects')),
+            'dormitoryId' => $request->get('dormitoryId'),
+        ];
+        $this->class->create($data);
+        return Redirect::route('classes.index')->withMessage('Class Created Successfully!!');
     }
 
     /**
@@ -59,11 +107,11 @@ class ClassesController extends Controller
      */
     public function show($id)
     {
-        $feetype = $this->feeType->where('id', $id)->first();
-        if($feetype) {
-            return Redirect::route('feetype.edit', $id);
+        $class = $this->class->where('id', $id)->first();
+        if($class) {
+            return Redirect::route('classes.edit', $id);
         }
-        return Redirect::route('feetype.index')->withMessage('Fee Type not found!!');
+        return Redirect::route('classes.index')->withMessage('Class not found!!');
     }
 
     /**
@@ -74,11 +122,28 @@ class ClassesController extends Controller
      */
     public function edit($id)
     {
-        $feetype = $this->feeType->where('id', $id)->first();
-        if($feetype) {
-            return view('account::feetype.edit', ['feetype' => $feetype]);
+        $class = $this->class->where('id', $id)->first()->toArray();
+        if($class) {
+            $class['classTeacher'] = json_decode($class['classTeacher']);
+            $class['classSubjects'] = json_decode($class['classSubjects']);
+
+            $role = Sentinel::findRoleBySlug('teacher');
+            $teachers = $role->users()->with('roles')->lists('first_name', 'id')->toArray();
+
+            $subject = new Subjects();
+            $subjects = $subject->lists('subjectTitle', 'id')->toArray();
+
+
+            $dormitory = new Dormitory();
+            $dormitories = $dormitory->lists('dormitory', 'id')->toArray();
+
+            $dormitories = [];
+            foreach ($dormitory->all() as $key => $value) {
+                $dormitories[$value->id] = $value->dormitory;
+            }
+            return view('class::class.edit', ['class' => $class,'teachers' => $teachers, 'subjects' => $subjects, 'dormitories' => $dormitories]);
         }
-        return Redirect::route('feetype.index')->withMessage('Fee Type not found!!');
+        return Redirect::route('classes.index')->withMessage('Class not found!!');
     }
 
     /**
@@ -90,8 +155,15 @@ class ClassesController extends Controller
      */
     public function update(CreateClassRequest $request, $id)
     {
-        $this->feeType->where('id', $id)->update($request->only('feeTitle', 'feeDefault', 'feeNotes'));
-        return Redirect::route('feetype.index')->withMessage('Fee Type Updated Successfully');
+        $data = [
+            'className' => $request->get('className'),
+            'classTeacher' => json_encode($request->get('classTeacher')),
+            'classAcademicYear' => 1,
+            'classSubjects' => json_encode($request->get('classSubjects')),
+            'dormitoryId' => $request->get('dormitoryId'),
+        ];
+        $this->class->where('id', $id)->update($data);
+        return Redirect::route('classes.index')->withMessage('Class Updated Successfully!!');
     }
 
     /**
@@ -102,11 +174,11 @@ class ClassesController extends Controller
      */
     public function confirm($id)
     {
-        $feetype = $this->feeType->where('id', $id)->first();
-        if($feetype) {
-            return view('account::feetype.confirm', compact('feetype') );
+        $class = $this->class->where('id', $id)->first();
+        if($class) {
+            return view('class::class.confirm', compact('class') );
         }
-        Redirect::route('feetype.index')->withMessage('Fee Type not found!!');
+        Redirect::route('classes.index')->withMessage('Class not found!!');
     }
 
     /**
@@ -117,7 +189,7 @@ class ClassesController extends Controller
      */
     public function destroy($id)
     {
-        $this->feeType->where('id', $id)->delete();
-        return Redirect::route('feetype.index')->withMessage('Fee Type Deleted successfully!!');
+        $this->class->where('id', $id)->delete();
+        return Redirect::route('classes.index')->withMessage('Class Deleted successfully!!');
     }
 }

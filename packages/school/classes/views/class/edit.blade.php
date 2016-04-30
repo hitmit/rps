@@ -1,6 +1,6 @@
 @extends('app')
 @section('contentheader_title')
-<i class="fa fa-money"></i> Edit {{ $feetype->feeTitle }} Fee Type
+<i class="fa fa-sitemap"></i> Edit {{ $class['className'] }}
 @endsection
 
 @section('main-content')
@@ -18,32 +18,41 @@
         @endif
         <div class="box box-info">
             <!-- form start -->
-            {!! Form::model($feetype, array('route' => array('feetype.update', $feetype->id), 'method' => 'PUT', 'class' => 'form-horizontal' )) !!}
+            {!! Form::model($class, array('route' => array('classes.update', $class['id']), 'method' => 'PUT', 'class' => 'form-horizontal' )) !!}
             <div class="box-body">
 
                 <div class="form-group">
-                    {!! Form::label('feeTitle', 'Fee Title', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('className', 'Class Name', ['class' => 'col-sm-2 control-label']) !!}
                     <div class="col-sm-10">
-                        {!! Form::text('feeTitle', null, array('class' => 'form-control' )) !!}
+                        {!! Form::text('className', null, ['class' => 'form-control' ]) !!}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    {!! Form::label('feeDefault', 'Default Amount', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('classTeacher', 'Class Teacher', ['class' => 'col-sm-2 control-label']) !!}
                     <div class="col-sm-10">
-                        {!! Form::text('feeDefault', null, array('class' => 'form-control' )) !!}
+                        {!! Form::select('classTeacher[]', $teachers, null, ['class' => 'form-control', 'multiple' => 'multiple']) !!}
                     </div>
                 </div>
+
                 <div class="form-group">
-                    {!! Form::label('feeNotes', 'Notes', array('class' => 'col-sm-2 control-label')) !!}
+                    {!! Form::label('classSubjects', 'Class Subjects', ['class' => 'col-sm-2 control-label']) !!}
                     <div class="col-sm-10">
-                        {!! Form::textarea('feeNotes', null, array('class' => 'form-control' )) !!}
+                        {!! Form::select('classSubjects[]', $subjects, null, ['class' => 'form-control', 'multiple' => 'multiple' ]) !!}
                     </div>
                 </div>
+
+                <div class="form-group">
+                    {!! Form::label('dormitoryId', 'Dormitory', ['class' => 'col-sm-2 control-label']) !!}
+                    <div class="col-sm-10">
+                        {!! Form::select('dormitoryId', [''=>'Select Dormitory'] + $dormitories, null, ['class' => 'form-control' ]) !!}
+                    </div>
+                </div>
+
             </div>
             <div class="box-footer">
-                <a href="{{ route('feetype.index') }}" class="btn btn-default pull-left">Cancel</a>
-                {!! Form::submit('Edit', array('class' => 'btn btn-info pull-right')) !!}
+                <a href="{{ route('classes.index') }}" class="btn btn-default pull-left">Cancel</a>
+                {!! Form::submit('Edit Class', array('class' => 'btn btn-info pull-right')) !!}
             </div>
             {!! Form::close() !!}
         </div><!-- /.box -->
