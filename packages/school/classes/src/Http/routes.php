@@ -8,4 +8,11 @@ Route::get('classes/{id}/confirm', [
     'uses' => 'School\Classes\Http\Controller\ClassesController@confirm',
 ]);
 
+Route::resource('sections', 'School\Classes\Http\Controller\SectionController');
+
+Route::get('sections/{id}/confirm', [
+    'as' => 'sections.confirm',
+    'uses' => 'School\Classes\Http\Controller\SectionController@confirm',
+]);
+
 //});

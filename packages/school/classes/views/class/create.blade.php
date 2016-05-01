@@ -32,7 +32,7 @@
                             <div class="col-sm-10">
                                 <select class="form-control" required="required" name="classTeacher[]" multiple="multiple">
                                     @foreach($teachers as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->first_name }}</option>
+                                        <option value="{{ $key }}">{{ $value }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -42,8 +42,8 @@
                             <label for="name" class="col-sm-2 control-label">Class Subjects</label>
                             <div class="col-sm-10">
                                 <select class="form-control" required="required" name="classSubjects[]" multiple="multiple">
-                                    @foreach($subjects as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->subjectTitle }}</option>
+                                    @foreach($subjects as $k => $val)
+                                        <option value="{{ $k }}">{{ $val }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -54,8 +54,8 @@
                             <div class="col-sm-10">
                                 <select class="form-control" name="dormitoryId">
                                     <option value="">Select Dormitory</option>
-                                    @foreach($dormitories as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->dormitory }}</option>
+                                    @foreach($dormitories as $keys => $values)
+                                        <option value="{{ $keys }}">{{ $values }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -63,7 +63,7 @@
 
                    	</div><!-- /.box-body -->
                   	<div class="box-footer">
-	                    <a href="{{ route('feetype.index') }}" class="btn btn-default pull-left">Cancel</a>
+	                    <a href="{{ route('classes.index') }}" class="btn btn-default pull-left">Cancel</a>
 	                    <button type="submit" class="btn btn-info pull-right">Add Class</button>
                   	</div><!-- /.box-footer -->
                 </form>
