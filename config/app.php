@@ -159,7 +159,7 @@ return [
 
         // School  auth class
         School\Auth\SchoolAuthServiceProvider::class,
-        
+
         // School Teacher class
         School\Teachers\TeachersServiceProvider::class,
 
@@ -177,6 +177,9 @@ return [
 
         // School Class class
         School\Classes\ClassesServiceProvider::class,
+
+        // School Students class
+        School\Students\StudentsServiceProvider::class,
     ],
 
     /*
