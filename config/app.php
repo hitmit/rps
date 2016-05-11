@@ -180,6 +180,9 @@ return [
 
         // School Students class
         School\Students\StudentsServiceProvider::class,
+        
+        // School Parents class
+        School\Parents\ParentsServiceProvider::class,
     ],
 
     /*
