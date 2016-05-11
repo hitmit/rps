@@ -31,7 +31,9 @@
             "School\\Dormitory\\": "packages/school/dormitory/src/",
             "School\\Subjects\\": "packages/school/subjects/src/",
             "School\\Accounts\\": "packages/school/accounts/src/",
-            "School\\Classes\\": "packages/school/classes/src/"
+            "School\\Classes\\": "packages/school/classes/src/",
+            "School\\Parents\\": "packages/school/parents/src/",
+            "School\\Hostel\\": "packages/school/hostel/src/"
         }
     },
     "autoload-dev": {

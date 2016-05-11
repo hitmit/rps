@@ -183,6 +183,9 @@ return [
         
         // School Parents class
         School\Parents\ParentsServiceProvider::class,
+        
+        // School Parents class
+        School\Hostel\HostelServiceProvider::class,
     ],
 
     /*
