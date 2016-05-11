@@ -79,6 +79,11 @@
                          {!! Form::label('transport', 'Transportation') !!}
                         {!! Form::select('transport', $transportations, null, ['class' => 'form-control']) !!}
                     </div>
+                    
+                    <div class="form-group">
+                         {!! Form::label('hostel', 'Hostel') !!}
+                        {!! Form::select('hostel', $hostels, null, ['class' => 'form-control']) !!}
+                    </div>
 
                     <div class="form-group">
                         {!! Form::label('photo', 'Photo') !!}

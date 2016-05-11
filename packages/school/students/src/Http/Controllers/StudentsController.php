@@ -9,8 +9,10 @@ use Illuminate\Support\Facades\View;
 use School\Students\Http\Requests\StudentCreateRequest;
 use School\Students\Http\Requests\StudentEditRequest;
 use School\Transports\Http\Models\TransportsModel;
+use School\Hostel\Models\HostelModel;
 use School\Classes\Models\ClassModel;
 use School\Auth\Models\UserAttributesModel as UserAttributes;
+use School\Auth\Models\StudentAcademicYears;
 use Session;
 use Redirect;
 use DB;
@@ -34,7 +36,8 @@ class StudentsController extends Controller {
     public function create() {
         $transportations = TransportsModel::lists('transportTitle', 'id')->toArray();
         $classes = ClassModel::lists('className', 'id')->toArray();
-        return View('student::student.create', compact('transportations', 'classes'));
+        $hostels = HostelModel::lists('hostelTitle', 'id')->toArray();
+        return View('student::student.create', compact('transportations', 'classes', 'hostels'));
     }
 
     /**
@@ -57,6 +60,7 @@ class StudentsController extends Controller {
         $user_attributes->transport = $request->get('transport');
         $user_attributes->studentClass = $request->get('studentClass');
         $user_attributes->studentRollId = $request->get('studentRollId');
+        $user_attributes->hostel = $request->get('hostel');
         if ($request->get('birthday') != "") {
             $birthday = strtotime($request->get('birthday'));
             $user_attributes->birthday = $birthday;
@@ -72,6 +76,12 @@ class StudentsController extends Controller {
         }
 
         $user_attributes->save();
+        
+        $studentAcademicYears = new StudentAcademicYears();
+        $studentAcademicYears->studentId = $sentinelUser->id;
+        $studentAcademicYears->academicYearId = 1;
+        $studentAcademicYears->classId = $request->get('studentClass');
+        $studentAcademicYears->save();
 
         return Redirect::route('students.index')->withMessage('Student Created Successfully.');
     }
@@ -90,11 +100,13 @@ class StudentsController extends Controller {
      */
     public function edit($id) {
         $userAttributes = UserAttributes::where('id', $id)->first()->toArray();
-        $user = Sentinel::findById($id)->toArray();
-        $data = $user + $userAttributes;
+        $account = Sentinel::findById($id)->toArray();
+        $data = $account + $userAttributes;
+        $user = (object)$data;
         $transportations = TransportsModel::lists('transportTitle', 'id')->toArray();
         $classes = ClassModel::lists('className', 'id')->toArray();
-        return View('student::student.edit', ['classes' => $classes, 'transportations' => $transportations, 'user' => (object)$data]);
+        $hostels = HostelModel::lists('hostelTitle', 'id')->toArray();
+        return View('student::student.edit', compact('classes', 'transportations', 'user', 'hostels'));
     }
 
     /**
@@ -114,6 +126,7 @@ class StudentsController extends Controller {
         $user_attributes->transport = $request->get('transport');
         $user_attributes->studentClass = $request->get('studentClass');
         $user_attributes->studentRollId = $request->get('studentRollId');
+        $user_attributes->hostel = $request->get('hostel');
 
         if ($request->get('birthday') != "") {
             $birthday = strtotime($request->get('birthday'));
