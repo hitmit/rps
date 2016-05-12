@@ -33,7 +33,8 @@
             "School\\Accounts\\": "packages/school/accounts/src/",
             "School\\Classes\\": "packages/school/classes/src/",
             "School\\Parents\\": "packages/school/parents/src/",
-            "School\\Hostel\\": "packages/school/hostel/src/"
+            "School\\Hostel\\": "packages/school/hostel/src/",
+            "School\\Newsboard\\": "packages/school/newsboard/src/"
         }
     },
     "autoload-dev": {

@@ -180,12 +180,15 @@ return [
 
         // School Students class
         School\Students\StudentsServiceProvider::class,
-        
+
         // School Parents class
         School\Parents\ParentsServiceProvider::class,
-        
+
         // School Parents class
         School\Hostel\HostelServiceProvider::class,
+
+        // School Newsboard class
+        School\Newsboard\NewsBoardServiceProvider::class,
     ],
 
     /*
