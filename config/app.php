@@ -189,6 +189,12 @@ return [
 
         // School Newsboard class
         School\Newsboard\NewsBoardServiceProvider::class,
+
+        // School Events class
+        School\Events\EventsServiceProvider::class,
+
+        // School ExamList class
+        School\ExamList\ExamListServiceProvider::class,
     ],
 
     /*

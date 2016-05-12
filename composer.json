@@ -34,7 +34,9 @@
             "School\\Classes\\": "packages/school/classes/src/",
             "School\\Parents\\": "packages/school/parents/src/",
             "School\\Hostel\\": "packages/school/hostel/src/",
-            "School\\Newsboard\\": "packages/school/newsboard/src/"
+            "School\\Newsboard\\": "packages/school/newsboard/src/",
+            "School\\Events\\": "packages/school/events/src/",
+            "School\\ExamList\\": "packages/school/examlist/src/"
         }
     },
     "autoload-dev": {
