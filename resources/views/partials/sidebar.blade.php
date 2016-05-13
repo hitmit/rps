@@ -32,14 +32,18 @@
             <li class="header">HEADER</li>
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="{{ url('home') }}"><i class='fa fa-link'></i> <span>Home</span></a></li>
-            <li><a href="#"><i class='fa fa-link'></i> <span>Another Link</span></a></li>
+            <li><a href="{{ route('classschedule.index') }}"><i class="fa fa-list"></i><span>Classes Schedule</span></a></li>
             <li class="treeview">
-                <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <a href="#"><i class='fa fa-bar-chart'></i> <span>Hostel Management</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a href="#">Link in level 2</a></li>
-                    <li><a href="#">Link in level 2</a></li>
+                    <li><a href="{{ route('hostel.index') }}"><i class="fa fa-check"></i><span>Hostel</span></a></li>
+                    <li><a href="{{ route('hostelCat.index') }}"><i class="fa fa-bar-chart"></i><span>Hostel Category</span></a></li>
                 </ul>
             </li>
+
+             <li><a href="{{ route('teachers.index') }}"><i class="fa fa-suitcase"></i><span>Teachers</span></a></li>
+             <li><a href="{{ route('students.index') }}"><i class="fa fa-users"></i><span>Students</span></a></li>
+             <li><a href="{{ route('examlist.index') }}"><i class="fa fa-graduation-cap"></i><span>Exam List</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
