@@ -76,7 +76,7 @@ class StudentsController extends Controller {
         }
 
         $user_attributes->save();
-        
+
         $studentAcademicYears = new StudentAcademicYears();
         $studentAcademicYears->studentId = $sentinelUser->id;
         $studentAcademicYears->academicYearId = 1;
@@ -172,5 +172,10 @@ class StudentsController extends Controller {
         // Delete User attributes.
         $user_attributes->delete();
         return Redirect::route('students.index')->withMessage('Student Deleted Successfully.');
+    }
+
+    public function search()
+    {
+        return view('student::student.search');
     }
 }

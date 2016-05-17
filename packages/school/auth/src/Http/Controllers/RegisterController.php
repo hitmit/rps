@@ -114,7 +114,7 @@ class RegisterController extends Controller {
         $students = DB::table('users')->where('first_name', 'like', '%' . $student . '%')->orWhere('email', 'like', '%' . $student . '%')->get();
         $retArray = array();
         foreach ($students as $student) {
-            $retArray[$student->id] = array(
+            $retArray[] = array(
                 "id" => $student->id,
                 "name" => $student->first_name,
                 "email" => $student->email

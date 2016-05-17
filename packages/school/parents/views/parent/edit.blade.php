@@ -17,95 +17,84 @@
         @endif
         <div class="box box-info">
             <!-- form start -->
-            <form role="form" method="POST" class="form-horizontal" action="{{ route('parents.update', $user->id)}}" enctype="multipart/form-data" encoding="multipart/form-data">
-                {!! csrf_field() !!}
-                <input name="_method" type="hidden" value="PUT">
+            {!! Form::model($user, ['route' => array('parents.update', $user->id), 'method' => 'PUT' ]) !!}
                 <div class="box-body">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">First name * </label>
-                        <div class="col-sm-10">
-                            <input type="text" name="first_name" class="form-control" required="required" value="{{ $user->first_name }}" placeholder="First name">
-                        </div>
+                        {!! Form::label('first_name', 'First Name *') !!}
+                        {!! Form::text('first_name', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label ">Last name</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="last_name" class="form-control" value="{{ $user->last_name }}" placeholder="Last name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Email address *</label>
-                        <div class="col-sm-10">
-                            <input type="email" name="email" class="form-control" value="{{ $user->email }}" placeholder="Email address" required="required">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Gender</label>
-                        <div class="col-sm-10">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="gender" value="male" {{ ($userAttributes->gender == 'male') ? 'checked' : '' }} >
-                                    Male
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="gender" value="female" {{ ($userAttributes->gender == 'female') ? 'checked' : '' }}>
-                                    Female
-                                </label>
-                            </div>
 
-                        </div>
-                    </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Birthday</label>
-                        <div class="col-sm-10">
-                            <input type="text" id="datemask" name="birthday" value="{{ $userAttributes->bitrhday }}" class="form-control datemask">
-                        </div>
+                        {!! Form::label('last_name', 'Last Name') !!}
+                        {!! Form::text('last_name', null, ['class' => 'form-control']) !!}
                     </div>
-                    <div date-picker="" selector=".datemask"></div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Address</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="address" value="{{ $userAttributes->address }}" class="form-control" placeholder="Address">
-                        </div>
+                        {!! Form::label('email', 'Email Address *') !!}
+                        {!! Form::email('email', null, ['class' => 'form-control', 'required' => 'required']) !!}
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Phone No</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="phoneNo" value="{{ $userAttributes->phoneNo }}" class="form-control" placeholder="Phone No">
-                        </div>
+                        {!! Form::label('gender', 'Gender') !!}
+                        {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female'], null, ['class' => 'form-control']) !!}
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Mobile No</label>
-                        <div class="col-sm-10">
-                            <input type="text" name="mobileNo" value="{{ $userAttributes->mobileNo }}" class="form-control" placeholder="Mobile No"/>
-                        </div>
+                        {!! Form::label('birthday', 'Birthday') !!}
+                        {!! Form::date('birthday', null, ['class' => 'form-control']) !!}
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Transportation</label>
-                        <div class="col-sm-10">
-                            <select name="transport" class="form-control">
-                                <option value="">No Transportation</option>
-                                @foreach ($transportations as $transportation)
-                                <option value="{{ $transportation->id }}" {{ ($userAttributes->transport == $transportation->id) ? 'selected' : '' }}>{{ $transportation->transportTitle }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                        {!! Form::label('address', 'Address') !!}
+                        {!! Form::text('address', null, ['class' => 'form-control']) !!}
                     </div>
+
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Photo</label>
-                        <div class="col-sm-10">
-                            <input type="file" name="photo">
+                        {!! Form::label('phoneNo', 'Phone Number') !!}
+                        {!! Form::text('phoneNo', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('mobileNo', 'Mobile Number') !!}
+                        {!! Form::text('mobileNo', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('parentProfession', 'Profession') !!}
+                        {!! Form::text('parentProfession', null, ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::label('photo', 'Photo') !!}
+                        {!! Form::file('photo', ['class' => 'form-control']) !!}
+                    </div>
+
+                    <div class="form-group">
+                        <a  role="menuitem" tabindex="-1" class="btn btn-success" data-toggle="modal" data-target="#UserModal" href="{{ route('students.search') }}">Link Student</a>
+                    </div>
+
+                    <div class="form-group">
+                        {!! Form::hidden('parentOf', null, ['id' => 'studentInfo']) !!}
+                        <div class="studentInfo" style="padding-top:5px;">
+
                         </div>
                     </div>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
-                    <a href="{{ route('teachers.index')}}" class="btn btn-default pull-left">Cancel</a>
-                    <button type="submit" class="btn btn-info pull-right">Edit Teacher</button>
+                    <a href="{{ route('students.index')}}" class="btn btn-default pull-left">Cancel</a>
+                    <button type="submit" class="btn btn-info pull-right">Edit Parent</button>
                 </div><!-- /.box-footer -->
-            </form>
+            {!! Form::close() !!}
         </div><!-- /.box -->
     </div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="UserModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div>
+</div>
+@endsection
+@section('script')
+<script type="text/javascript" src="{{ asset('/js/Angular/parent.js')}}"></script>
 @endsection

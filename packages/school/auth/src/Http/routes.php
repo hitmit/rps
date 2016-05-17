@@ -15,7 +15,7 @@ Route::group(['middleware' => 'loggedIn'], function () {
         'as' => 'home',
         'uses' => 'School\Auth\Http\Controllers\LoginController@home',
     ));
-    
+
     Route::get('logout',[
         'as' => 'logout',
         'uses' => 'School\Auth\Http\Controllers\LoginController@logout',

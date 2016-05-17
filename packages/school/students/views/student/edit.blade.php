@@ -73,7 +73,7 @@
                          {!! Form::label('transport', 'Transportation') !!}
                         {!! Form::select('transport', $transportations, null, ['class' => 'form-control']) !!}
                     </div>
-                    
+
                     <div class="form-group">
                          {!! Form::label('hostel', 'Hostel') !!}
                         {!! Form::select('hostel', $hostels, null, ['class' => 'form-control']) !!}
@@ -88,7 +88,7 @@
                     <a href="{{ route('students.index')}}" class="btn btn-default pull-left">Cancel</a>
                     <button type="submit" class="btn btn-info pull-right">Edit Student</button>
                 </div><!-- /.box-footer -->
-            </form>
+            {!! Form::close() !!}
         </div><!-- /.box -->
     </div>
 </div>

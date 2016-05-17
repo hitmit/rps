@@ -37,19 +37,21 @@ class ParentsController extends Controller {
      * Store Teacher to system.
      */
     public function store(ParentCreateRequest $request) {
+
         $user = $request->only('first_name', 'last_name', 'email', 'password');
         $sentinelUser = Sentinel::registerAndActivate($user);
 
         $role = Sentinel::findRoleBySlug('parent');
 
         $role->users()->attach($sentinelUser);
-        //Getting user Attributes from request object
+        // Getting user Attributes from request object
         $user_attributes = new UserAttributes;
         $user_attributes->id = $sentinelUser->id;
         $user_attributes->gender = $request->get('gender');
         $user_attributes->address = $request->get('address');
         $user_attributes->phoneNo = $request->get('phoneNo');
         $user_attributes->mobileNo = $request->get('mobileNo');
+        $user_attributes->parentProfession = $request->get('parentProfession');
         if ($request->get('birthday') != "") {
             $birthday = strtotime($request->get('birthday'));
             $user_attributes->birthday = $birthday;
@@ -63,6 +65,7 @@ class ParentsController extends Controller {
 
             $user_attributes->photo = $newFileName;
         }
+        $user_attributes->parentOf = json_encode($request->get('parentOf'));
 
         $user_attributes->save();
 
@@ -72,21 +75,24 @@ class ParentsController extends Controller {
     /**
      * update Teacher.
      */
-    public function show($id) {
+    public function show($id)
+    {
         $userAttributes = UserAttributes::where('id', $id)->first();
         $user = Sentinel::findById($id);
-        $transportations = DB::table('transportation')->get();
         return View('parent::parent.show', ['userAttributes' => $userAttributes, 'user' => $user]);
     }
 
     /**
      * Edit Teacher form.
      */
-    public function edit($id) {
-        $userAttributes = UserAttributes::where('id', $id)->first();
-        $user = Sentinel::findById($id);
-        $transportations = DB::table('transportation')->get();
-        return View('parent::parent.edit', ['transportations' => $transportations, 'userAttributes' => $userAttributes, 'user' => $user]);
+    public function edit($id)
+    {
+        $userAttributes = UserAttributes::where('id', $id)->first()->toArray();
+        $account = Sentinel::findById($id)->toArray();
+        $data = $account + $userAttributes;
+        $user = (object)$data;
+        $user->parentOf = json_decode($user->parentOf);
+        return View('parent::parent.edit', ['user' => $user]);
     }
 
     /**
@@ -103,7 +109,7 @@ class ParentsController extends Controller {
         $user_attributes->address = $request->get('address');
         $user_attributes->phoneNo = $request->get('phoneNo');
         $user_attributes->mobileNo = $request->get('mobileNo');
-        $user_attributes->transport = $request->get('transport');
+        $user_attributes->parentProfession = $request->get('parentProfession');
 
         if ($request->get('birthday') != "") {
             $birthday = strtotime($request->get('birthday'));
@@ -118,7 +124,7 @@ class ParentsController extends Controller {
 
             $user_attributes->photo = $newFileName;
         }
-
+        $user_attributes->parentOf = json_encode($request->get('parentOf'));
         $user_attributes->save();
 
         return Redirect::route('parents.index')->withMessage('Parent Updated Successfully.');

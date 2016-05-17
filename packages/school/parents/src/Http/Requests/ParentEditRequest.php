@@ -22,11 +22,11 @@ class ParentEditRequest extends Request {
      */
     public function rules() {
 
-        // Basic Property Validation  
+        // Basic Property Validation
         $rules = [
             'first_name' => 'required|max:255',
         ];
-        
+
         $TeacherId = $this->route('parents');
 
         if ($TeacherId) {

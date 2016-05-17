@@ -24,12 +24,12 @@ schoex.controller('registeration', function ($scope, $http) {
                 $scope.error = true;
                 $scope.errorMessage = data.error;
             }
-            
+
             if (data.id) {
                 $scope.regId = data.id;
                 $scope.changeView("thanks");
             }
-            
+
         });
     }
 
@@ -126,8 +126,3 @@ schoex.directive('modal', function () {
         }
     };
 });
-
-//schoex.controller('registeration', ['$scope', function ($scope) {
-//
-//}]);
-

@@ -7,4 +7,5 @@
       'as' => 'parents.confirm',
       'uses' => 'School\Parents\Http\Controllers\ParentsController@confirm',
     ));
+
 //});
