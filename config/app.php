@@ -201,6 +201,9 @@ return [
 
         // School StudyMaterials class
         School\StudyMaterial\StudyMaterialServiceProvider::class,
+
+        // School Assignments class
+        School\Assignments\AssignmentsServiceProvider::class,
     ],
 
     /*

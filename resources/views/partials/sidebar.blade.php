@@ -45,6 +45,8 @@
              <li><a href="{{ route('students.index') }}"><i class="fa fa-users"></i><span>Students</span></a></li>
              <li><a href="{{ route('parents.index') }}"><i class="fa fa-user"></i><span>Parents</span></a></li>
              <li><a href="{{ route('gradelevels.index') }}"><i class="fa fa-check-square-o"></i><span>Grade Levels</span></a></li>
+             <li><a href="{{ route('studymaterials.index') }}"><i class="fa fa-book"></i><span>Study Materials</span></a></li>
+             <li><a href="{{ route('studymaterials.index') }}"><i class="fa fa-file-pdf-o"></i><span>Assignments</span></a></li>
              <li><a href="{{ route('examlist.index') }}"><i class="fa fa-graduation-cap"></i><span>Exam List</span></a></li>
         </ul><!-- /.sidebar-menu -->
     </section>

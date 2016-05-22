@@ -1,0 +1,18 @@
+{
+    "name": "school/assignments",
+    "description": "Assignments Package for school",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hitesh Mittal",
+            "email": "hiteshmittal1990@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr~4": {
+            "school\\assignments\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {}
+}

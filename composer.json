@@ -38,7 +38,8 @@
             "School\\Events\\": "packages/school/events/src/",
             "School\\ExamList\\": "packages/school/examlist/src/",
             "School\\GradeLevels\\": "packages/school/gradelevels/src/",
-            "School\\StudyMaterial\\": "packages/school/StudyMaterial/src/"
+            "School\\StudyMaterial\\": "packages/school/studymaterial/src/",
+            "School\\Assignments\\": "packages/school/assignments/src/"
         }
     },
     "autoload-dev": {

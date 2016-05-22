@@ -1,11 +1,11 @@
 <?php
 
-namespace School\StudyMaterial\Http\Requests;
+namespace School\Assignments\Http\Requests;
 
 use App\Http\Requests\Request;
 use Sentinel;
 
-class CreateStudyMaterialRequest extends Request
+class CreateAssignmentsRequest   extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,6 @@ class CreateStudyMaterialRequest extends Request
         {
             return false;
         }
-
     }
 
     /**
@@ -33,9 +32,10 @@ class CreateStudyMaterialRequest extends Request
     public function rules()
     {
         return [
-            'material_title' => 'required',
-            'class_id' => 'required',
-            'subject_id' => 'required'
+            'AssignTitle' => 'required',
+            'AssignDeadLine' => 'required',
+            'classId' => 'required',
+            'subjectId' => 'required'
         ];
 
     }
