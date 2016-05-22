@@ -21,7 +21,7 @@ class ClassScheduleController extends Controller
      */
     public function index()
     {
-        $classes = ClassModel::where('dormitoryId', 1)->get();
+        $classes = ClassModel::where('classAcademicYear', 1)->get();
         return view('class::classschedule.list', compact('classes'));
     }
 
@@ -58,11 +58,11 @@ class ClassScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function createSchedule()
+    public function createSchedule($id)
     {
         $days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thrusday', 'Friday', 'Saturday');
         $subjects = Subjects::lists('subjectTitle', 'id')->toArray();
-        return view('class::classschedule.add', compact('days', 'subjects'));
+        return view('class::classschedule.add', compact('days', 'subjects', 'day'));
     }
 
     /**

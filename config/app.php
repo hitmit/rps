@@ -195,6 +195,9 @@ return [
 
         // School ExamList class
         School\ExamList\ExamListServiceProvider::class,
+
+        // School GradeLevels class
+        School\GradeLevels\GradeLevelsServiceProvider::class,
     ],
 
     /*
