@@ -1,6 +1,6 @@
 {
-    "name": "school/gradelevels",
-    "description": "Grade Levels Package for school",
+    "name": "school/studymaterial",
+    "description": "Study Material Package for school",
     "license": "MIT",
     "authors": [
         {
@@ -10,7 +10,7 @@
     ],
     "autoload": {
         "psr~4": {
-            "school\\gradelevels\\": "src/"
+            "school\\studymaterial\\": "src/"
         }
     },
     "minimum-stability": "dev",

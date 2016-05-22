@@ -198,6 +198,9 @@ return [
 
         // School GradeLevels class
         School\GradeLevels\GradeLevelsServiceProvider::class,
+
+        // School StudyMaterials class
+        School\StudyMaterial\StudyMaterialServiceProvider::class,
     ],
 
     /*
