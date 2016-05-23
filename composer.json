@@ -39,7 +39,8 @@
             "School\\ExamList\\": "packages/school/examlist/src/",
             "School\\GradeLevels\\": "packages/school/gradelevels/src/",
             "School\\StudyMaterial\\": "packages/school/studymaterial/src/",
-            "School\\Assignments\\": "packages/school/assignments/src/"
+            "School\\Assignments\\": "packages/school/assignments/src/",
+            "School\\Library\\": "packages/school/library/src/"
         }
     },
     "autoload-dev": {

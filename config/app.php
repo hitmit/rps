@@ -204,6 +204,9 @@ return [
 
         // School Assignments class
         School\Assignments\AssignmentsServiceProvider::class,
+
+        // School Library class
+        School\Library\LibraryServiceProvider::class,
     ],
 
     /*
